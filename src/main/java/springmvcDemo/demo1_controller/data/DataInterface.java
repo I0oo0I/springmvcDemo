@@ -1,4 +1,4 @@
-package springmvcDemo.data;
+package springmvcDemo.demo1_controller.data;
 
 import java.util.List;
 

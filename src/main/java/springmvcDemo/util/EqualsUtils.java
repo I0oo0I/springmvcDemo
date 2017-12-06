@@ -2,8 +2,8 @@ package springmvcDemo.util;
 
 import java.lang.reflect.Field;
 
-import springmvcDemo.data.DataModel;
-import springmvcDemo.data.DataModel2;
+import springmvcDemo.demo1_controller.data.DataModel;
+import springmvcDemo.demo1_controller.data.DataModel2;
 
 public class EqualsUtils {
 

@@ -51,12 +51,6 @@
   	<!-- 用于spring的单元测试 -->
   	<dependency>
   		<groupId>org.springframework</groupId>
-  		<artifactId>spring-mock</artifactId>
-  		<version>2.0.8</version>
-  		<scope>test</scope>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.springframework</groupId>
   		<artifactId>spring-tx</artifactId>
   		<version>${spring.version}</version>
   	</dependency>
@@ -73,11 +67,13 @@
   	</dependency>
   	
   	<!-- servlet -->
-  	<dependency>
-  		<groupId>javax.servlet</groupId>
-  		<artifactId>servlet-api</artifactId>
-  		<version>2.5</version>
-  	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.1.0</version>
+	    <scope>provided</scope>
+	</dependency>
   	
   	<!-- freemarker 即一种基于模板和要改变的数据， 并用来生成输出文本(HTML网页，电子邮件，配置文件，源代码等)的通用工具 -->
   	<dependency>

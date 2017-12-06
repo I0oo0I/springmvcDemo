@@ -6,10 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	function submitIds(){
+		var url = "${pageContext.request.contextPath}/home3";
+		var param = {};
+		var a = new Array();
+		
+		$.post(url, param, function(result){
+			console.log(result);
+		}, function(){
+			console.log("111");
+		})
+	}
+</script>
+
 </head>
 <body>
 	<h1>Home page</h1>
 	<a href= "<c:url value="/" />">index</a>
 	<a href= "<c:url value="/home" />">注册</a>
+	
+	<button value="提交" onclick="submitIds()"></button>
 </body>
 </html>

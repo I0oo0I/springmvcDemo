@@ -1,4 +1,4 @@
-package springmvcDemo.config;
+package springmvcDemo.demo1_controller.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
