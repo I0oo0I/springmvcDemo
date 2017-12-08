@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/home3")
 	@ResponseBody
-	public String home3(DataMode3 mode3) {
+	public String home3() {
 		return "success";
 	}
 	

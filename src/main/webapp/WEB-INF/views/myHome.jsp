@@ -13,8 +13,7 @@
 	function submitIds(){
 		var url = "${pageContext.request.contextPath}/home3";
 		var param = {};
-		var a = new Array();
-		
+		param.ids = new Array('1','2','3','4');
 		$.post(url, param, function(result){
 			console.log(result);
 		}, function(){
