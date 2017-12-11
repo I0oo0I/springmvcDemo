@@ -13,12 +13,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  */
 public class HomeControllerTest {
 
+	
 	@Test
 	public void testHome() throws Exception {
 		HomeController home = new HomeController();
 		MockMvc mvc = MockMvcBuilders.standaloneSetup(home).build();
 		mvc.perform(get("/home/aaa/25"));
+//		
+//		mvc.perform(get("/home2?name=bbb&age=23"));
 		
-		mvc.perform(get("/home2?name=bbb&age=23"));
+		//mvc.perform(get("/home5?name=aa&id=1&age=10&email=1"));
 	}
 }

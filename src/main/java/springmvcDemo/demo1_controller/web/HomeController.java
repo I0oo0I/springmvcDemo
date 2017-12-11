@@ -2,6 +2,8 @@ package springmvcDemo.demo1_controller.web;
 
 import java.util.Arrays;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import springmvcDemo.demo1_controller.data.DataMode3;
+import springmvcDemo.demo1_controller.data.InputDataValid;
 
 @Controller
 public class HomeController {
@@ -49,6 +52,12 @@ public class HomeController {
 	public String home4() {
 		System.out.println("name：");
 		return "myHome";
+	}
+	
+	@RequestMapping(value="/home5")
+	@ResponseBody
+	public String testInputValid(@Valid InputDataValid data) {
+		return "success";
 	}
 	
 }

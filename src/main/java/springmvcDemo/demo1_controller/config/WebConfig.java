@@ -37,6 +37,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		resolver.setSuffix(".jsp");
 		//设置是否把所有在上下文中定义的bean作为request属性可公开访问。这样在JSP 2.0中可使用${}来存取，JSTL中使用c:out。默认为false。
 		resolver.setExposeContextBeansAsAttributes(true);
+		//resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class); //将视图解析为jstlview
 		return resolver;
 	} 
 	
@@ -48,9 +49,9 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		//要求将静态资源的请求转发到Servlet容器默认的servlet上，而不是DispatcherServlet本身来处理请求
 		//因为前配置的 SpittrWebAppInitializer DispatcherServlet拦截的是 return new String[] {"/"}; 所有请求，包括了静态资源的请求
 		//将 configurer.enable(); 注释掉后，http://localhost:8080/springmvcDemo/js/test.js 会出现404，访问不到静态资源
-		//个人理解：DispacherServlet 的拦截自定的请求，比如说 .do的请求，拿到请求后，取例如：/home/home 去匹配，匹配的资源是所有的
+		//个人理解：DispacherServlet 的拦截指定的请求，拿到请求后，例如：/home/home 去匹配，匹配的资源是所有的
 		//       requestMapping的 url，匹配上了就会执行对应的 方法，没有匹配上就会报404，
-		//如果，知识拦截.do的请求，在web-inf外的静态资源是可以直接访问的。
+		//如果，只是拦截.do的请求，在web-inf外的静态资源是可以直接访问的。
 		configurer.enable();
 	}
 }
