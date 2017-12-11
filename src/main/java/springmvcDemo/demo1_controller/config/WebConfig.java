@@ -1,8 +1,13 @@
 package springmvcDemo.demo1_controller.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -53,5 +58,19 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		//       requestMapping的 url，匹配上了就会执行对应的 方法，没有匹配上就会报404，
 		//如果，只是拦截.do的请求，在web-inf外的静态资源是可以直接访问的。
 		configurer.enable();
+	}
+	
+	/**
+	 * 文件上传 MultipartConfigElement 的替代方法
+	 * @return
+	 * @throws IOException 
+	 */
+	@Bean
+	public MultipartResolver multipartResolver() throws IOException {
+		CommonsMultipartResolver mutipart = new CommonsMultipartResolver();
+		mutipart.setUploadTempDir(new FileSystemResource("/upload"));
+		mutipart.setMaxInMemorySize(0);
+		mutipart.setMaxUploadSize(5000000);
+		return mutipart;
 	}
 }

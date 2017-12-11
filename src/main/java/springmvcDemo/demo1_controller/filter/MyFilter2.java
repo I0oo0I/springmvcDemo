@@ -28,11 +28,11 @@ public class MyFilter2 implements Filter{
 		if(StringUtils.isNotBlank(name)) {
 			if(name.indexOf("aaa") >= 0) {
 				System.out.println(name+"是敏感词汇拦截");
-			}else {
-				chain.doFilter(httpRequest, response);
+				return;
 			}
-			
 		}
+		httpRequest.setCharacterEncoding("utf-8");
+		chain.doFilter(httpRequest, response);
 	}
 
 	@Override

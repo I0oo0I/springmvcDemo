@@ -74,6 +74,16 @@
 	    <version>3.1.0</version>
 	    <scope>provided</scope>
 	</dependency>
+	
+	<!-- 没有jsp-api ${pageContext.request.contextPath}会报错 -->
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jsp-api</artifactId>
+	    <version>2.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	
   	
   	<!-- freemarker 即一种基于模板和要改变的数据， 并用来生成输出文本(HTML网页，电子邮件，配置文件，源代码等)的通用工具 -->
   	<dependency>

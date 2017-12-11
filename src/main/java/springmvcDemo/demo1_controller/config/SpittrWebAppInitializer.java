@@ -59,7 +59,9 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		System.out.println("----------------------------------我是初始化DispatcherServlet配置参数----------------------------------");
 		registration.setLoadOnStartup(1); //设置优先级
 		registration.setInitParameter("aa", "dfd");	//设置初始化参数
-		registration.setMultipartConfig(new MultipartConfigElement("/upload")); //DispatcherServlet 启用配置Servlet 3.0对multipart的支持 
+		//DispatcherServlet 启用配置Servlet 3.0对multipart的支持 , 对应的参数是，位置，最大文件尺寸，最大请求大小，文件写入硬盘临界值
+		//如果不是Servlet 3.0 的容器，需要其他的配置方式了，现在在 WebConfig 中定义一个 CommonsMultipartResolver
+		//registration.setMultipartConfig(new MultipartConfigElement("/upload", 4000000, 5000000, 0)); 
 	}
 	
 	/**

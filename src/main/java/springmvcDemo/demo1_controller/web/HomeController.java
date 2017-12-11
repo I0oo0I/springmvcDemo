@@ -1,19 +1,17 @@
 package springmvcDemo.demo1_controller.web;
 
-import java.util.Arrays;
-
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import springmvcDemo.demo1_controller.data.DataMode3;
 import springmvcDemo.demo1_controller.data.InputDataValid;
+import springmvcDemo.demo1_controller.data.RequestUploadFile;
 
 @Controller
 public class HomeController {
@@ -58,6 +56,15 @@ public class HomeController {
 	@ResponseBody
 	public String testInputValid(@Valid InputDataValid data) {
 		return "success";
+	}
+	
+	@RequestMapping("/uploadFile")
+	public void uploadFile(RequestUploadFile uploadFile) {
+		System.out.println(uploadFile.getUsername());
+		MultipartFile file = uploadFile.getUploadFile();
+		if(null != file) {
+			System.out.println(file.getOriginalFilename());
+		}
 	}
 	
 }
