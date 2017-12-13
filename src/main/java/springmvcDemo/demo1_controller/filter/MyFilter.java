@@ -16,13 +16,11 @@ public class MyFilter implements Filter{
 		
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("我是MyFilter，拦截了MyServlet");
-			chain.doFilter(request, response);
-			
+	    System.out.println("我是MyFilter，拦截了MyServlet");
+		chain.doFilter(request, response);
 	}
 
 	@Override
