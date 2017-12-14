@@ -18,7 +18,7 @@ public class HomeControllerTest {
 	public void testHome() throws Exception {
 		HomeController home = new HomeController();
 		MockMvc mvc = MockMvcBuilders.standaloneSetup(home).build();
-		mvc.perform(get("/home/aaa/25"));
+		mvc.perform(get("/api/home/home/aaa/25"));
 //		
 //		mvc.perform(get("/home2?name=bbb&age=23"));
 		

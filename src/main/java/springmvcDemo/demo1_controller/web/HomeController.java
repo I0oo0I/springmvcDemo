@@ -12,8 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import springmvcDemo.demo1_controller.data.InputDataValid;
 import springmvcDemo.demo1_controller.data.RequestUploadFile;
+import springmvcDemo.demo1_controller.exception_handler.SystemException;
 
 @Controller
+@RequestMapping("api/home")
 public class HomeController {
 
 	/**
@@ -65,6 +67,12 @@ public class HomeController {
 		if(null != file) {
 			System.out.println(file.getOriginalFilename());
 		}
+	}
+	
+	@RequestMapping("/exceptionHandler")
+	@ResponseBody
+	public String testExceptionHandler() throws SystemException {
+		throw new SystemException("抛出异常");
 	}
 	
 }

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -22,8 +23,9 @@ public class MyFilter2 implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("我是MyFilter2， 拦截的DispatcherServlet");
+		System.out.println("我是MyFilter2， 拦截DispatcherServlet");
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
+		HttpServletResponse httpResonse = (HttpServletResponse) response;
 		String name = httpRequest.getParameter("name");
 		if(StringUtils.isNotBlank(name)) {
 			if(name.indexOf("aaa") >= 0) {
@@ -32,7 +34,10 @@ public class MyFilter2 implements Filter{
 			}
 		}
 		httpRequest.setCharacterEncoding("utf-8");
-		chain.doFilter(httpRequest, response);
+		response.setContentType("text/html; charset=utf-8");
+		response.setContentType("text/plain; charset=utf-8");
+		response.setContentType("text/javascript; charset=utf-8");
+		chain.doFilter(httpRequest, httpResonse);
 	}
 
 	@Override
