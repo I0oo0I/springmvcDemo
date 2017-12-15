@@ -85,8 +85,65 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/api/home/home4").authenticated()	//前面指定要验证的url， 后面执行验证操作, 也可以使用通配符/api/**
+			.antMatchers("/api/home/home4").authenticated()	//前面指定要验证的url， 也可以使用通配符/api/**, 允许认证过的访问
 			.antMatchers(HttpMethod.POST, "/api/home/home3").authenticated() //也可以指定方法
-			.anyRequest().permitAll();		//其他的方法都方行
+			.anyRequest().permitAll();	//其他的方法都方行
+//			.antMatchers("").access("")  //SpEL表达式，返回true,允许访问
+//			.antMatchers("").anonymous()	//指定哪些url可以匿名访问
+//			.antMatchers("").denyAll()     //拒接所有的访问
+//			.antMatchers("").fullyAuthenticated()   //完整的验证过的，不是通过 remember me 验证 的可以访问
+//			.antMatchers("").hasAnyAuthority("","") //有其中任意一个权限，就可以访问
+//			.antMatchers("").hasAnyRole("","")  //有任意一个角色就可以访问
+//			.antMatchers("").hasAuthority("")  //有某一个权限就可以访问
+//			.antMatchers("").hasIpAddress("")  //指定的ip可以访问
+//			.antMatchers("").hasRole("")  //指定的角色可以访问
+//			.antMatchers("").not().hasRole("") // not() 是取反的意思
+//			.antMatchers("").rememberMe()   // rememberMe 验证的可以访问
+		
+			//hasRole() 和  hasAuthority() 是一个意思，写发不一样， hasRole("USER")  hasAuthority("ROLE_USER") hasRole 是简写
+			//注：这个是按照顺序访问的，所有具体的要放在前面，否则前面被不具体的匹配上了，后面的就不进行匹配了。
+		
+			//上面的限制，每一个url只能添加一个限制条件，但是想要多个限制条件，怎么办？ access 的 SpEL表达式
+//			.antMatchers("").access("hasRole('USER') and hasIpAddress('192.168.7.235')")
+		    // authentication				用户的认证对象
+			// denyAll						拒接所有，access('denyAll') 始终返回 false
+			//hasAnyRole(list of roles)		任意角色
+			//hasRole(role)					拥有某一个角色返回true
+			//hasIpAddress(IP Address)		是某一个ip，返回true
+			//isAnonymous() 				当前用户匿名访问返回true
+			//isAuthenticated()				用户是认证的返回 true			
+			//isFullyAuthenticated()		用户是完整的验证的返回 true	
+			//isRememberMe()				用户是通过remember me验证的返回true
+			//permitAll						始终为true
+			//principal						用户的principal  access("isAuthenticated() and principal.username=='小花'");
+		
+		http.
+		formLogin()//启用默认的登录页
+			.loginPage("/login")
+			.and()
+		.logout()
+			.logoutSuccessUrl("/")			//修改默认的登出重定向（默认是/login），重定向到主页
+			.logoutUrl("/logoutUrl")	    //修改Spring security 的默认的登出的 url
+			.and()
+		.rememberMe()							//通常是在cookie中存储一个token，token保存用户名，密码，过期时间，和一个私匙，
+			.tokenValiditySeconds(2419200)
+			.key("keyName")						//若没有定义，私匙的名字是SpringSecured，这里重新定义一个专用的名字
+		    .and()
+		.authorizeRequests()
+			.antMatchers("/api/home/home4").authenticated()	//前面指定要验证的url， 也可以使用通配符/api/**, 允许认证过的访问
+			.antMatchers(HttpMethod.POST, "/api/home/home3").authenticated() //也可以指定方法
+			.anyRequest().permitAll()
+			.and()
+		.requiresChannel()
+			.antMatchers("").requiresSecure()    //强制某个请求使用https， 例如表单提交， 会通过requiresChannel重定向到https,保证数据安全
+			.antMatchers("").requiresInsecure()  //使用 http, 比如公共的内容，不需要加密的
+			.and()
+		.csrf()
+			.disable();							//禁用 csrf,  csrf阻止跨站请求伪造，建议开启 如果请求中不包含CSRF token的话，或者token不能与服务器端的token相匹配，请求将会失败，
 	}
+	
+//		用户退出时，发起对“/logout”的请求，这个请求会
+//		被Spring Security的LogoutFilter所处理。用户会退出应用，所有
+//		的Remember-me token都会被清除掉。在退出完成后，用户浏览器将会
+//		重定向到“/login?logout”，从而允许用户进行再次登录。
 }
